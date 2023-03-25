@@ -6,12 +6,16 @@ import {
   COMENZAR_DESCARGA_PRODUCTOS,
   DESCARGA_PRODUCTOS_EXITO,
   DESCARGA_PRODUCTOS_ERROR,
+  OBTENER_PRODUCTO_ELIMINAR,
+  PRODUCTO_ELIMINADO_EXITO,
+  PRODUCTO_ELIMINADO_ERROR,
 } from "../types";
 
 const initialState = {
   productos: [],
   error: null,
   loading: false,
+  productoeliminar: null,
 };
 
 //si no le paso un state toma por defecto el initialState
@@ -26,11 +30,22 @@ export default function productosReducer(state = initialState, action) {
       return { ...state, loading: false, productos: [...state.productos, action.payload] };
 
     case DESCARGA_PRODUCTOS_ERROR:
+    case PRODUCTO_ELIMINADO_ERROR:
     case AGREGAR_PRODUCTO_ERROR:
       return { ...state, loading: false, error: action.payload };
 
     case DESCARGA_PRODUCTOS_EXITO:
       return { ...state, loading: false, error: null, productos: action.payload };
+
+    case OBTENER_PRODUCTO_ELIMINAR:
+      return { ...state, productoeliminar: action.payload };
+
+    case PRODUCTO_ELIMINADO_EXITO:
+      return {
+        ...state,
+        productos: state.productos.filter((producto) => producto.id !== state.productoeliminar),
+        productoeliminar: null,
+      };
 
     default:
       return state;
