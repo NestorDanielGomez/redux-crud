@@ -19,6 +19,21 @@
       "nombre": "vino",
       "precio": 300,
       "id": 4
+    },
+    {
+      "nombre": "achicoria",
+      "precio": 500,
+      "id": 5
+    },
+    {
+      "nombre": "zanahoria",
+      "precio": 350,
+      "id": 6
+    },
+    {
+      "nombre": "zapallito",
+      "precio": 700,
+      "id": 7
     }
   ]
 }

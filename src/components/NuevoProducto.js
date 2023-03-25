@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
 import { crearNuevoProductoAction } from "../actions/productoActions";
 
-const NuevoProducto = () => {
+const NuevoProducto = ({ history }) => {
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState(0);
 
   const dispatch = useDispatch();
   const cargando = useSelector((state) => state.productos.loading);
   const error = useSelector((state) => state.productos.error);
+  const navigate = useNavigate();
 
   const agregaProducto = (producto) => dispatch(crearNuevoProductoAction(producto));
 
@@ -20,6 +21,8 @@ const NuevoProducto = () => {
     }
 
     agregaProducto({ nombre, precio });
+
+    navigate("/");
   };
 
   return (
