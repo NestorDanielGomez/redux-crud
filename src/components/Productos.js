@@ -17,10 +17,12 @@ const Productos = () => {
   return (
     <Fragment>
       <h2 className="my-5 text-center">Listado de Productos</h2>
-      {error && (
+      {error ? (
         <p className="font-weight-bold alert alert-danger text-center mt-4">Hubo un error</p>
-      )}
-      {cargando && <p className="font-weight-bold alert alert-info text-center mt-4">Cargando</p>}
+      ) : null}
+      {cargando ? (
+        <p className="font-weight-bold alert alert-info text-center mt-4">Cargando</p>
+      ) : null}
       <table className="table table-striped">
         <thead className="bg-primary table-dark">
           <tr className="">
@@ -36,9 +38,9 @@ const Productos = () => {
           </tr>
         </thead>
         <tbody>
-          {productos.length === 0
+          {productos?.length === 0
             ? "No hay productos"
-            : productos?.map((producto) => <Producto key={producto.id} producto={producto} />)}
+            : productos.map((producto) => <Producto key={producto?.id} producto={producto} />)}
         </tbody>
       </table>
     </Fragment>

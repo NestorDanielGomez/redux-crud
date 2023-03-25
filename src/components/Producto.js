@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 
-import { borrarProductoAction } from "../actions/productoActions";
+import { borrarProductoAction, obtenerProductoEditar } from "../actions/productoActions";
 
 const Producto = ({ producto }) => {
-  const { nombre, precio, id } = producto;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const confirmarEliminarProducto = (id) => {
     Swal.fire({
@@ -25,18 +25,26 @@ const Producto = ({ producto }) => {
     });
   };
 
+  const redireccionarEdicion = (producto) => {
+    dispatch(obtenerProductoEditar(producto));
+    navigate(`/productos/editar/${producto.id}`);
+  };
+
   return (
     <tr>
-      <td>{nombre}</td>
+      <td>{producto?.nombre}</td>
       <td className="">
-        <span className="font-weight-bold">{precio}</span>
+        <span className="font-weight-bold">{producto?.precio}</span>
       </td>
       <td className="acciones">
-        <Link className="btn btn-primary mr-2" to={`productos/editar/${id}`}>
-          Editar
-        </Link>
         <button
-          onClick={() => confirmarEliminarProducto(id)}
+          type="button"
+          className="btn btn-primary mr-2"
+          onClick={() => redireccionarEdicion(producto)}>
+          Editar
+        </button>
+        <button
+          onClick={() => confirmarEliminarProducto(producto?.id)}
           className="btn btn-danger"
           type="button">
           Eliminar
