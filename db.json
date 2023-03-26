@@ -1,13 +1,13 @@
 {
   "productos": [
     {
-      "nombre": "Tomate  redondo",
+      "nombre": "Tomate aaa",
       "precio": "500",
       "id": 1
     },
     {
-      "nombre": "Naranja ",
-      "precio": 100,
+      "nombre": "Naranja ombligo",
+      "precio": "400",
       "id": 2
     },
     {
@@ -24,6 +24,16 @@
       "nombre": "achicoria",
       "precio": 500,
       "id": 5
+    },
+    {
+      "nombre": "licor limon",
+      "precio": 700,
+      "id": 6
+    },
+    {
+      "nombre": "perejil",
+      "precio": 3000,
+      "id": 7
     }
   ]
 }

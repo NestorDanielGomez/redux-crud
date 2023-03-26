@@ -2,35 +2,47 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { crearNuevoProductoAction } from "../actions/productoActions";
+import { mostrarAlertaAction, ocultarAlertaAction } from "../actions/alertaActions";
 
-const NuevoProducto = ({ history }) => {
+const NuevoProducto = () => {
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState(0);
 
+  const cargando = useSelector((state) => state.productos?.loading);
+  const error = useSelector((state) => state.productos?.error);
+  const alerta = useSelector((state) => state.alerta?.alerta);
+
   const dispatch = useDispatch();
-  const cargando = useSelector((state) => state.productos.loading);
-  const error = useSelector((state) => state.productos.error);
   const navigate = useNavigate();
 
   const agregaProducto = (producto) => dispatch(crearNuevoProductoAction(producto));
 
   const submitProducto = (e) => {
     e.preventDefault();
+
     if (nombre.trim() === "" || precio <= 0) {
+      const alerta = {
+        msg: "Ambos campos son obligatorios",
+        classes: "alert alert-danger text-center text-uppercase",
+      };
+
+      dispatch(mostrarAlertaAction(alerta));
       return;
     }
-
+    dispatch(ocultarAlertaAction());
     agregaProducto({ nombre, precio });
 
     navigate("/");
   };
 
+  console.log("alerta", alerta);
   return (
     <div className="row justify-content-center">
       <div className="col-md-8">
         <div className="card">
           <div className="card-body">
             <h2 className="text-center mb-4 font-weight-bold">Agregar Nuevo Producto</h2>
+            {alerta ? <p className={alerta.classes}> {alerta.msg} </p> : null}
             <form onSubmit={submitProducto} className="">
               <div className="form-group">
                 <label htmlFor="" className="">

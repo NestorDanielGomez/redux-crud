@@ -10,9 +10,9 @@ const Productos = () => {
     cargarProductos();
   }, [dispatch]);
 
-  const productos = useSelector((state) => state.productos.productos);
-  const error = useSelector((state) => state.productos.error);
-  const cargando = useSelector((state) => state.productos.loading);
+  const productos = useSelector((state) => state.productos?.productos);
+  const error = useSelector((state) => state.productos?.error);
+  const cargando = useSelector((state) => state.productos?.loading);
 
   return (
     <Fragment>
@@ -25,16 +25,10 @@ const Productos = () => {
       ) : null}
       <table className="table table-striped">
         <thead className="bg-primary table-dark">
-          <tr className="">
-            <th className="" scope="col">
-              Nombre
-            </th>
-            <th className="" scope="col">
-              Precio
-            </th>
-            <th className="" scope="col">
-              Acciones
-            </th>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
